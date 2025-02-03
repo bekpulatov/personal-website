@@ -5,7 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Your Name - Personal Website</title>
   
-  <!-- Font Awesome for Social Media Icons (if needed elsewhere) -->
+  <!-- Font Awesome is still loaded in case you want to use it elsewhere.
+       For the social media buttons below, you can replace the <i> elements with <img> tags.
+       To do so, download the official logos (preferably in SVG format) from:
+         • LinkedIn: https://brand.linkedin.com/downloads
+         • Twitter (X): https://about.twitter.com/en/who-we-are/brand-toolkit
+         • Instagram: https://www.instagram.com/about/us/brand/
+         • Telegram: https://telegram.org/brand
+       Then update the <a> elements in the header accordingly. -->
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -30,7 +37,7 @@
       line-height: 1.6;
     }
     
-    /* Thinner layout for the website */
+    /* Overall layout for most sections */
     section {
       padding: 40px 20px;
       max-width: 600px;
@@ -71,7 +78,8 @@
       border: 1px solid #e0e0e0;
       border-radius: 50%;
       text-decoration: none;
-      transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      background-color: white;
     }
     .social-icons a:hover {
       transform: scale(1.1);
@@ -82,6 +90,21 @@
       transform: scale(0.95);
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     }
+    /* Example using Font Awesome icons.
+       To use image logos instead, replace the <i> tags below with:
+       <img src="your-downloaded-logo.svg" alt="Social Logo" class="social-logo">
+       and add the following CSS for .social-logo. */
+    .social-icons i {
+      font-size: 1.2rem;
+      color: #333;
+    }
+    /* Uncomment and adjust if using image logos:
+    .social-logo {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+    }
+    */
     
     /* Section Headings */
     section h2 {
@@ -90,17 +113,24 @@
       text-align: center;
     }
     
-    /* Projects Layout (My Background) */
+    /* My Background Section - Project Boxes */
     .project {
       display: flex;
       align-items: center;
       margin-bottom: 30px;
       gap: 20px;
     }
-    .project img,
-    .instagram-embed-container img {
+    /* Regular project images */
+    .project img {
       width: 280px;
       height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    /* Former Influencer Instagram preview (bigger now) */
+    .instagram-embed-container img {
+      width: 300px;
+      height: 300px;
       object-fit: cover;
       border-radius: 8px;
     }
@@ -113,22 +143,16 @@
     }
     .project .project-info p {
       font-size: 1rem;
+      margin-bottom: 5px;
     }
-    
-    /* Instagram Embed Container (Former Influencer) */
-    .instagram-embed-container {
-      position: relative;
-      cursor: pointer;
-      display: inline-block;
+    /* Link styling for project websites */
+    .project .project-info p a {
+      font-size: 0.9rem;
+      color: #007aff;
+      text-decoration: none;
     }
-    .instagram-embed-container .play-button {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 2rem;
-      color: rgba(255, 255, 255, 0.8);
-      pointer-events: none;
+    .project .project-info p a:hover {
+      text-decoration: underline;
     }
     
     /* Now Section */
@@ -158,6 +182,11 @@
     }
     
     /* References Section */
+    /* For consistency, the References section remains within the overall 600px width */
+    #references {
+      max-width: 600px;
+      margin: 0 auto;
+    }
     #references p {
       text-align: center;
       margin-bottom: 30px;
@@ -170,14 +199,16 @@
       gap: 20px;
     }
     .reference .slider {
+      /* Set slider width same as project images (280px)
+         and height increased by 40% over 180px → 180px * 1.4 = 252px */
       width: 280px;
-      height: 180px;
+      height: 252px;
       position: relative;
       overflow: hidden;
     }
     .reference .slider img.slider-image {
-      width: 100%;
-      height: 100%;
+      width: 280px;
+      height: 252px;
       object-fit: cover;
       border-radius: 8px;
       position: absolute;
@@ -202,8 +233,12 @@
       padding: 5px 10px;
       border-radius: 4px;
     }
+    /* Center the reference text vertically */
     .reference .reference-info {
       flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
     .reference .reference-info h3 {
       font-size: 1.3rem;
@@ -215,21 +250,27 @@
     
     /* Additional Accomplishments (Q&A) Section */
     #accomplishments details {
-      background-color: #f9f9f9;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      padding: 10px;
+      background-color: #fff;
+      border: 1px solid #e5e5e5;
+      border-radius: 12px;
+      padding: 20px;
       margin-bottom: 20px;
+      transition: box-shadow 0.3s ease;
       cursor: pointer;
     }
+    #accomplishments details:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
     #accomplishments summary {
-      font-size: 1.1rem;
-      font-weight: bold;
+      font-size: 1.2rem;
+      font-weight: 600;
       list-style: none;
+      cursor: pointer;
     }
     #accomplishments p {
-      margin-top: 10px;
+      margin-top: 12px;
       font-size: 1rem;
+      line-height: 1.5;
     }
     
     /* My Contacts Section */
@@ -247,6 +288,9 @@
     
     /* Responsive Adjustments */
     @media (max-width: 768px) {
+      section {
+        max-width: 100%;
+      }
       .project, .reference {
         flex-direction: column;
         text-align: center;
@@ -258,26 +302,39 @@
         height: auto;
       }
     }
+    
+    .social-icons .social-logo {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+    }
   </style>
 </head>
 <body>
   <header>
     <!-- Replace with your actual profile picture -->
-    <img src="your-picture.jpg" alt="Your Picture" class="profile-pic" />
-    <h1>Your Name</h1>
+    <img src="my-photo.jpg" alt="Your Picture" class="profile-pic" />
+    <h1>Ulugbek Pulatov, 24 y.o., marketer</h1>
     <div class="social-icons">
-      <!-- If you prefer using images for social media logos, replace the <i> elements with <img> tags as needed -->
-      <a href="https://www.linkedin.com/in/yourprofile" target="_blank" aria-label="LinkedIn">
-        <i class="fab fa-linkedin-in"></i>
+      <!-- Social media buttons: You can choose between Font Awesome icons or image logos.
+           To use image logos, replace the <i> elements below with <img> tags.
+           
+           Example with images:
+           <a href="https://www.linkedin.com/in/yourprofile" target="_blank" aria-label="LinkedIn">
+             <img src="linkedin-logo.svg" alt="LinkedIn Logo" class="social-logo">
+           </a>
+      -->
+      <a href="https://www.linkedin.com/in/ulugbekpulatov" target="_blank" aria-label="LinkedIn">
+        <img src="/Users/apple/Desktop/personal-website/linkedin-logo.png" alt="LinkedIn" style="width: 65px; height:65px;">
       </a>
-      <a href="https://twitter.com/yourprofile" target="_blank" aria-label="X">
-        <i class="fab fa-twitter"></i>
+      <a href="https://twitter.com/bekpulatov1" target="_blank" aria-label="X">
+        <img src="/Users/apple/Desktop/personal-website/x-logo.png" alt="X" style="width: 32px; height: 32px;">
       </a>
-      <a href="https://www.instagram.com/yourprofile" target="_blank" aria-label="Instagram">
-        <i class="fab fa-instagram"></i>
+      <a href="https://www.instagram.com/bek_pulatoff" target="_blank" aria-label="Instagram">
+        <img src="/Users/apple/Desktop/personal-website/instagram-logo.png" alt="Instagram" style="width: 40px; height: 40px;">
       </a>
-      <a href="https://t.me/yourprofile" target="_blank" aria-label="Telegram">
-        <i class="fab fa-telegram-plane"></i>
+      <a href="https://t.me/pulatov_channel" target="_blank" aria-label="Telegram">
+        <img src="/Users/apple/Desktop/personal-website/telegram-logo.png" alt="Telegram" style="width: 40px; height: 40px;">
       </a>
     </div>
   </header>
@@ -289,20 +346,22 @@
     <!-- Project 1 -->
     <div class="project">
       <!-- Replace with the image for pulatovschool.uz -->
-      <img src="project1.jpg" alt="Pulatov School" />
+      <img src="/Users/apple/Desktop/personal-website/pulatovschool.jpg" alt="Pulatov School" />
       <div class="project-info">
-        <h3>Founder and CEO of Online Academy: pulatovschool.uz</h3>
+        <h3>Founder and CEO of online academy</h3>
         <p>11,000 clients and a turnover of $3 million</p>
+        <p><a href="https://pulatovschool.uz" target="_blank">https://pulatovschool.uz</a></p>
       </div>
     </div>
     
     <!-- Project 2 -->
     <div class="project">
       <!-- Replace with the image for forteagency.io -->
-      <img src="project2.jpg" alt="Forte Agency" />
+      <img src="/Users/apple/Desktop/personal-website/forte.png" alt="Forte Agency" />
       <div class="project-info">
-        <h3>Founder and CEO of Influencer Marketing Agency: forteagency.io</h3>
+        <h3>Founder and CEO of influencer marketing agency</h3>
         <p>Generated $2 million in earnings for influencers</p>
+        <p><a href="https://forteagency.io" target="_blank">https://forteagency.io</a></p>
       </div>
     </div>
     
@@ -311,7 +370,7 @@
       <!-- Instagram video preview container on the left -->
       <div class="instagram-embed-container">
         <!-- Replace "instagram-preview.jpg" with your preview image -->
-        <img src="instagram-preview.jpg" alt="Instagram Video Preview">
+        <img src="/Users/apple/Desktop/personal-website/influencer.png" alt="Instagram Video Preview">
         <div class="play-button">
           <i class="fas fa-play-circle"></i>
         </div>
@@ -342,7 +401,7 @@
         </a>
       </li>
     </ul>
-    <!-- New Technical Co-Founder Block -->
+    <!-- Technical Co-Founder Block -->
     <div class="co-founder">
       <p>
         I am looking for a technical co-founder with extensive experience in developing web and mobile applications—someone who is up-to-date with the latest advancements in AI and proficient in working with LLMs. I will focus on marketing, while the co-founder handles all technical aspects.
@@ -363,19 +422,17 @@
       <!-- Slider container with two images -->
       <div class="slider">
         <!-- Replace with your images for Mikhail -->
-        <img src="mikhail1.jpg" alt="Mikhail Reference 1" class="slider-image">
-        <img src="mikhail2.jpg" alt="Mikhail Reference 2" class="slider-image" style="display: none;">
+        <img src="/Users/apple/Desktop/personal-website/mikhail1.jpg" alt="Mikhail Reference 1" class="slider-image">
+        <img src="/Users/apple/Desktop/personal-website/mikhail2.jpg" alt="Mikhail Reference 2" class="slider-image" style="display: none;">
         <div class="slider-nav">
           <button class="slider-prev">&#10094;</button>
           <button class="slider-next">&#10095;</button>
         </div>
       </div>
-      <!-- Reference text -->
+      <!-- Reference text (vertically centered) -->
       <div class="reference-info">
         <h3>Mikhail, COO of Online Academy "Pulatov School"</h3>
-        <p>
-          A seasoned professional from Ukraine sharing his experience working with me.
-        </p>
+        <p>A seasoned professional from Ukraine sharing his experience working with me.</p>
       </div>
     </div>
     
@@ -384,19 +441,17 @@
       <!-- Slider container with two images -->
       <div class="slider">
         <!-- Replace with your images for Anastasia -->
-        <img src="anastasia1.jpg" alt="Anastasia Reference 1" class="slider-image">
-        <img src="anastasia2.jpg" alt="Anastasia Reference 2" class="slider-image" style="display: none;">
+        <img src="/Users/apple/Desktop/personal-website/anastasia1.jpg" alt="Anastasia Reference 1" class="slider-image">
+        <img src="/Users/apple/Desktop/personal-website/anastasia2.jpg" alt="Anastasia Reference 2" class="slider-image" style="display: none;">
         <div class="slider-nav">
           <button class="slider-prev">&#10094;</button>
           <button class="slider-next">&#10095;</button>
         </div>
       </div>
-      <!-- Reference text -->
+      <!-- Reference text (vertically centered) -->
       <div class="reference-info">
         <h3>Anastasia</h3>
-        <p>
-          She worked as a producer on my projects, bringing creativity and organization to our work.
-        </p>
+        <p>She worked as a producer on my projects, bringing creativity and organization to our work.</p>
       </div>
     </div>
   </section>
@@ -409,7 +464,20 @@
       <details>
         <summary>A time when I most successfully hacked some (non-computer) system to my advantage</summary>
         <p>
-          When Russia invaded Ukraine in February 2022, many high-level edtech producers decided to leave Russia. I realized they would soon start looking for projects in nearby countries—especially for influencers to produce content. Producing influencers yields the best financial results. While they were still figuring out their next steps, I knew the key was to have the top influencers in my country in my pocket. I immediately started meeting with all the major influencers in Uzbekistan—about 20 in total (with millions of followers and genuine influence). I signed contracts with 14 of them, where I promised to pay them for one ad per month, but without actually running the ad. In return, I secured their agreement to decline any offers from other producers. Next, I reached out to every community I knew with international producers and announced myself as the person who controlled the top influencers in Uzbekistan. I invited them to work with me directly. As a result, I began connecting producers with influencers, earning 10-20% from each deal. I essentially acted as a marketplace. This strategy generated hundreds of thousands of dollars in revenue and provided us with valuable experience that we applied to our other projects.
+          When Russia invaded Ukraine in February 2022, many high-level edtech producers decided to leave Russia. I realized they would soon start looking for projects in nearby countries—especially for influencers to produce content. 
+          <p>
+            Producing influencers yields the best financial results. While they were still figuring out their next steps, I knew the key was to have the top influencers in my country in my pocket. 
+          </p>
+          <p>
+          I immediately started meeting with all the major influencers in Uzbekistan—about 20 in total (with millions of followers and genuine influence). 
+          </p>
+          <p>
+          I signed contracts with 14 of them, where I promised to pay them for one ad per month, but without actually running the ad. In return, I secured their agreement to decline any offers from other producers. 
+        </p>
+        Next, I reached out to every community I knew with international producers and announced myself as the person who controlled the top influencers in Uzbekistan. I invited them to work with me directly. 
+      </p>
+      <p>
+        As a result, I began connecting producers with influencers, earning 10-20% from each deal. I essentially acted as a marketplace. This strategy generated hundreds of thousands of dollars in revenue and provided us with valuable experience that we applied to our other projects.
         </p>
       </details>
     </div>
@@ -429,19 +497,20 @@
     <h2>My Contacts</h2>
     <p>Email: <a href="mailto:ulugbek.pulatov.00@gmail.com">ulugbek.pulatov.00@gmail.com</a></p>
     <p>Telegram: <a href="https://t.me/ulugbekpulatovv" target="_blank">t.me/ulugbekpulatovv</a></p>
-    <p>WhatsApp: <!-- Insert WhatsApp contact or link if available --></p>
+    <p>WhatsApp: <a href="https://wa.me/998946119797" target="_blank">+998946119797</a></p>
   </section>
   
   <footer style="text-align: center; padding: 20px; font-size: 0.9rem; color: #777;">
-    <p>&copy; 2025 Your Name. All rights reserved.</p>
+    <p>&copy; 2025 17people LLC. All rights reserved.</p>
   </footer>
   
-  <!-- JavaScript: Instagram Preview (for Former Influencer) -->
+  <!-- JavaScript: Instagram Preview for Former Influencer -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       var instaContainer = document.querySelector('.instagram-embed-container');
       if (instaContainer) {
         instaContainer.addEventListener('click', function() {
+          // Get the current container dimensions so the embed matches the preview size
           var containerWidth = instaContainer.offsetWidth;
           var containerHeight = instaContainer.offsetHeight;
           var instagramEmbedUrl = "https://www.instagram.com/p/CQtaY1pnQuL/embed";

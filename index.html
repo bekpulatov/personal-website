@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Name - Personal Website</title>
+  
+  <!-- Font Awesome for Social Media Icons (if needed elsewhere) -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-papNG6C+U+E3I+a4vSk1d6u68M+8i7O1z/9sQvlfllYU+9+6aOz2jU0NE6kqYvsyY/k5IYJeEGx3hIoXgqY3Qw=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+  
+  <style>
+    /* Basic Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    /* Global Styles */
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #fff;
+      color: #333;
+      line-height: 1.6;
+    }
+    
+    /* Thinner layout for the website */
+    section {
+      padding: 40px 20px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    /* Header Styles */
+    header {
+      text-align: center;
+      padding: 40px 20px;
+    }
+    header img.profile-pic {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #e0e0e0;
+      margin-bottom: 20px;
+    }
+    header h1 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+    
+    /* Social Media Icons */
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    .social-icons a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border: 1px solid #e0e0e0;
+      border-radius: 50%;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    }
+    .social-icons a:hover {
+      transform: scale(1.1);
+      background-color: #f0f0f0;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .social-icons a:active {
+      transform: scale(0.95);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* Section Headings */
+    section h2 {
+      font-size: 1.75rem;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    
+    /* Projects Layout (My Background) */
+    .project {
+      display: flex;
+      align-items: center;
+      margin-bottom: 30px;
+      gap: 20px;
+    }
+    .project img,
+    .instagram-embed-container img {
+      width: 280px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .project .project-info {
+      flex: 1;
+    }
+    .project .project-info h3 {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+    .project .project-info p {
+      font-size: 1rem;
+    }
+    
+    /* Instagram Embed Container (Former Influencer) */
+    .instagram-embed-container {
+      position: relative;
+      cursor: pointer;
+      display: inline-block;
+    }
+    .instagram-embed-container .play-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 2rem;
+      color: rgba(255, 255, 255, 0.8);
+      pointer-events: none;
+    }
+    
+    /* Now Section */
+    .now-list {
+      list-style-type: none;
+      margin-top: 20px;
+      padding-left: 0;
+    }
+    .now-list li {
+      margin-bottom: 15px;
+      font-size: 1rem;
+    }
+    .now-list li a {
+      color: #007aff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .now-list li a:hover {
+      text-decoration: underline;
+    }
+    .co-founder {
+      margin-top: 20px;
+      font-size: 1rem;
+    }
+    .co-founder p {
+      margin-bottom: 10px;
+    }
+    
+    /* References Section */
+    #references p {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 1rem;
+    }
+    .reference {
+      display: flex;
+      align-items: center;
+      margin-bottom: 30px;
+      gap: 20px;
+    }
+    .reference .slider {
+      width: 280px;
+      height: 180px;
+      position: relative;
+      overflow: hidden;
+    }
+    .reference .slider img.slider-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 8px;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .reference .slider .slider-nav {
+      position: absolute;
+      width: 100%;
+      bottom: 5px;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 10px;
+      box-sizing: border-box;
+    }
+    .reference .slider button {
+      background: rgba(0,0,0,0.5);
+      border: none;
+      color: #fff;
+      font-size: 1rem;
+      cursor: pointer;
+      padding: 5px 10px;
+      border-radius: 4px;
+    }
+    .reference .reference-info {
+      flex: 1;
+    }
+    .reference .reference-info h3 {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+    .reference .reference-info p {
+      font-size: 1rem;
+    }
+    
+    /* Additional Accomplishments (Q&A) Section */
+    #accomplishments details {
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 10px;
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
+    #accomplishments summary {
+      font-size: 1.1rem;
+      font-weight: bold;
+      list-style: none;
+    }
+    #accomplishments p {
+      margin-top: 10px;
+      font-size: 1rem;
+    }
+    
+    /* My Contacts Section */
+    #contacts p {
+      font-size: 1rem;
+      margin-bottom: 10px;
+    }
+    #contacts a {
+      color: #007aff;
+      text-decoration: none;
+    }
+    #contacts a:hover {
+      text-decoration: underline;
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .project, .reference {
+        flex-direction: column;
+        text-align: center;
+      }
+      .project img,
+      .instagram-embed-container img,
+      .reference .slider {
+        width: 100%;
+        height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <!-- Replace with your actual profile picture -->
+    <img src="your-picture.jpg" alt="Your Picture" class="profile-pic" />
+    <h1>Your Name</h1>
+    <div class="social-icons">
+      <!-- If you prefer using images for social media logos, replace the <i> elements with <img> tags as needed -->
+      <a href="https://www.linkedin.com/in/yourprofile" target="_blank" aria-label="LinkedIn">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+      <a href="https://twitter.com/yourprofile" target="_blank" aria-label="X">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="https://www.instagram.com/yourprofile" target="_blank" aria-label="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://t.me/yourprofile" target="_blank" aria-label="Telegram">
+        <i class="fab fa-telegram-plane"></i>
+      </a>
+    </div>
+  </header>
+  
+  <!-- My Background Section -->
+  <section id="background">
+    <h2>My Background</h2>
+    
+    <!-- Project 1 -->
+    <div class="project">
+      <!-- Replace with the image for pulatovschool.uz -->
+      <img src="project1.jpg" alt="Pulatov School" />
+      <div class="project-info">
+        <h3>Founder and CEO of Online Academy: pulatovschool.uz</h3>
+        <p>11,000 clients and a turnover of $3 million</p>
+      </div>
+    </div>
+    
+    <!-- Project 2 -->
+    <div class="project">
+      <!-- Replace with the image for forteagency.io -->
+      <img src="project2.jpg" alt="Forte Agency" />
+      <div class="project-info">
+        <h3>Founder and CEO of Influencer Marketing Agency: forteagency.io</h3>
+        <p>Generated $2 million in earnings for influencers</p>
+      </div>
+    </div>
+    
+    <!-- Project 3: Former Influencer with Instagram Video Preview -->
+    <div class="project">
+      <!-- Instagram video preview container on the left -->
+      <div class="instagram-embed-container">
+        <!-- Replace "instagram-preview.jpg" with your preview image -->
+        <img src="instagram-preview.jpg" alt="Instagram Video Preview">
+        <div class="play-button">
+          <i class="fas fa-play-circle"></i>
+        </div>
+      </div>
+      <!-- Text on the right -->
+      <div class="project-info">
+        <h3>Former Influencer</h3>
+        <p>Built a following of 250k on Instagram</p>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Now Section -->
+  <section id="now">
+    <h2>Now</h2>
+    <p>
+      Six months ago, I decided to shift my focus towards mobile application development using large language models, and in that time I managed to accomplish the following:
+    </p>
+    <ul class="now-list">
+      <li>
+        <a href="https://apps.apple.com/uz/app/eda-ai/id6642710058" target="_blank">
+          An app that calculates food calories from a photo
+        </a>
+      </li>
+      <li>
+        <a href="https://nargiza.org" target="_blank">
+          A voice-enabled AI matchmaker for finding long-term romantic relationships (in development)
+        </a>
+      </li>
+    </ul>
+    <!-- New Technical Co-Founder Block -->
+    <div class="co-founder">
+      <p>
+        I am looking for a technical co-founder with extensive experience in developing web and mobile applications—someone who is up-to-date with the latest advancements in AI and proficient in working with LLMs. I will focus on marketing, while the co-founder handles all technical aspects.
+      </p>
+      <p>
+        <strong>Goal:</strong> To collaboratively create applications in the USA at the intersection of B2C, mobile apps, and psychology.
+      </p>
+    </div>
+  </section>
+  
+  <!-- References Section -->
+  <section id="references">
+    <h2>References</h2>
+    <p>People who have worked with me</p>
+    
+    <!-- Reference 1 -->
+    <div class="reference">
+      <!-- Slider container with two images -->
+      <div class="slider">
+        <!-- Replace with your images for Mikhail -->
+        <img src="mikhail1.jpg" alt="Mikhail Reference 1" class="slider-image">
+        <img src="mikhail2.jpg" alt="Mikhail Reference 2" class="slider-image" style="display: none;">
+        <div class="slider-nav">
+          <button class="slider-prev">&#10094;</button>
+          <button class="slider-next">&#10095;</button>
+        </div>
+      </div>
+      <!-- Reference text -->
+      <div class="reference-info">
+        <h3>Mikhail, COO of Online Academy "Pulatov School"</h3>
+        <p>
+          A seasoned professional from Ukraine sharing his experience working with me.
+        </p>
+      </div>
+    </div>
+    
+    <!-- Reference 2 -->
+    <div class="reference">
+      <!-- Slider container with two images -->
+      <div class="slider">
+        <!-- Replace with your images for Anastasia -->
+        <img src="anastasia1.jpg" alt="Anastasia Reference 1" class="slider-image">
+        <img src="anastasia2.jpg" alt="Anastasia Reference 2" class="slider-image" style="display: none;">
+        <div class="slider-nav">
+          <button class="slider-prev">&#10094;</button>
+          <button class="slider-next">&#10095;</button>
+        </div>
+      </div>
+      <!-- Reference text -->
+      <div class="reference-info">
+        <h3>Anastasia</h3>
+        <p>
+          She worked as a producer on my projects, bringing creativity and organization to our work.
+        </p>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Additional Accomplishments (Q&A) Section -->
+  <section id="accomplishments">
+    <h2>Additional Accomplishments</h2>
+    <!-- Q&A Item 1 -->
+    <div class="qa-item">
+      <details>
+        <summary>A time when I most successfully hacked some (non-computer) system to my advantage</summary>
+        <p>
+          When Russia invaded Ukraine in February 2022, many high-level edtech producers decided to leave Russia. I realized they would soon start looking for projects in nearby countries—especially for influencers to produce content. Producing influencers yields the best financial results. While they were still figuring out their next steps, I knew the key was to have the top influencers in my country in my pocket. I immediately started meeting with all the major influencers in Uzbekistan—about 20 in total (with millions of followers and genuine influence). I signed contracts with 14 of them, where I promised to pay them for one ad per month, but without actually running the ad. In return, I secured their agreement to decline any offers from other producers. Next, I reached out to every community I knew with international producers and announced myself as the person who controlled the top influencers in Uzbekistan. I invited them to work with me directly. As a result, I began connecting producers with influencers, earning 10-20% from each deal. I essentially acted as a marketplace. This strategy generated hundreds of thousands of dollars in revenue and provided us with valuable experience that we applied to our other projects.
+        </p>
+      </details>
+    </div>
+    <!-- Q&A Item 2 -->
+    <div class="qa-item">
+      <details>
+        <summary>Another Impressive Thing</summary>
+        <p>
+          During quarantine, I helped my friend promote his product with more than 100 popular celebrities in Uzbekistan in exchange for his goods (cost $30). The entire country believed my friend's company was government-backed because people assumed that a huge amount of money was being spent on advertising. No commercial project had ever done anything like this before, but in reality, I simply took advantage of the unique market conditions.
+        </p>
+      </details>
+    </div>
+  </section>
+  
+  <!-- My Contacts Section -->
+  <section id="contacts">
+    <h2>My Contacts</h2>
+    <p>Email: <a href="mailto:ulugbek.pulatov.00@gmail.com">ulugbek.pulatov.00@gmail.com</a></p>
+    <p>Telegram: <a href="https://t.me/ulugbekpulatovv" target="_blank">t.me/ulugbekpulatovv</a></p>
+    <p>WhatsApp: <!-- Insert WhatsApp contact or link if available --></p>
+  </section>
+  
+  <footer style="text-align: center; padding: 20px; font-size: 0.9rem; color: #777;">
+    <p>&copy; 2025 Your Name. All rights reserved.</p>
+  </footer>
+  
+  <!-- JavaScript: Instagram Preview (for Former Influencer) -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var instaContainer = document.querySelector('.instagram-embed-container');
+      if (instaContainer) {
+        instaContainer.addEventListener('click', function() {
+          var containerWidth = instaContainer.offsetWidth;
+          var containerHeight = instaContainer.offsetHeight;
+          var instagramEmbedUrl = "https://www.instagram.com/p/CQtaY1pnQuL/embed";
+          instaContainer.innerHTML = '<iframe src="' + instagramEmbedUrl + '" frameborder="0" scrolling="no" allowtransparency="true" allowfullscreen style="width:' + containerWidth + 'px; height:' + containerHeight + 'px;"></iframe>';
+        });
+      }
+    });
+  </script>
+  
+  <!-- JavaScript: Simple Slider for References -->
+  <script>
+    document.querySelectorAll('.slider').forEach(function(slider) {
+      var images = slider.querySelectorAll('img.slider-image');
+      var currentIndex = 0;
+      var nextBtn = slider.querySelector('.slider-next');
+      var prevBtn = slider.querySelector('.slider-prev');
+      
+      nextBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        images[currentIndex].style.display = 'none';
+        currentIndex = (currentIndex + 1) % images.length;
+        images[currentIndex].style.display = 'block';
+      });
+      
+      prevBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        images[currentIndex].style.display = 'none';
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        images[currentIndex].style.display = 'block';
+      });
+    });
+  </script>
+</body>
+</html>

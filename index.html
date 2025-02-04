@@ -129,15 +129,97 @@
       font-size: 1.75rem;
       margin-bottom: 30px;
       text-align: center;
+      position: relative;
+      padding-bottom: 15px;
     }
     
-    /* My Background Section - Project Boxes */
-    .project {
-      display: flex;
-      align-items: center;
-      margin-bottom: 30px;
-      gap: 20px;
+    section h2:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, #007aff, #00c6ff);
+      border-radius: 3px;
     }
+    
+    /* Add image caption styles */
+    .project-image-container {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .image-caption {
+      font-size: 0.9rem;
+      color: #666;
+      margin-top: 8px;
+      font-style: italic;
+      text-align: center;
+    }
+    
+    /* Project card styles */
+    .project {
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 40px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    
+    .project-content {
+      padding: 20px;
+      display: flex;
+      gap: 30px;
+      align-items: flex-start;
+    }
+    
+    .project-image-container {
+      flex: 0 0 280px;
+    }
+    
+    .project-info {
+      flex: 1;
+    }
+    
+    /* Mobile styles */
+    @media (max-width: 768px) {
+      .project-content {
+        flex-direction: column;
+        padding: 15px;
+      }
+      
+      .project-image-container {
+        flex: none;
+        width: 100%;
+        margin-bottom: 0;
+      }
+      
+      .image-caption {
+        font-size: 0.85rem;
+        padding: 0 6px;
+        background: #f8f9fa;
+        border-radius: 2px;
+        display: inline-block;
+        margin: 0;
+        line-height: 1.2;
+      }
+      
+      .project-info {
+        border-top: 1px solid #eee;
+        margin-top: 0;
+        padding-top: 0;
+        text-align: center;
+      }
+      
+      .project-info h3 {
+        margin-top: 4px;
+      }
+    }
+    
     /* Regular project images */
     .project img {
       width: 280px;
@@ -224,17 +306,29 @@
       flex-shrink: 0;
       background: #f5f5f5;
       border-radius: 8px;
+      padding: 10px;
     }
     .reference .slider img.slider-image {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
       border-radius: 8px;
       display: none;
       position: static;
+      background: #f5f5f5;
     }
     .reference .slider img.slider-image.active {
       display: block;
+    }
+    .reference .slider-nav {
+      position: absolute;
+      bottom: 10px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 10px;
+      z-index: 2;
     }
     .reference .slider button {
       background: rgba(0,0,0,0.6);
@@ -245,9 +339,21 @@
       padding: 8px 12px;
       border-radius: 4px;
       transition: background-color 0.3s ease;
+      z-index: 3;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .reference .slider button:hover {
       background: rgba(0,0,0,0.8);
+    }
+    .reference .slider button.slider-prev {
+      margin-right: auto;
+    }
+    .reference .slider button.slider-next {
+      margin-left: auto;
     }
     
     /* Center the reference text vertically */
@@ -275,15 +381,39 @@
       transition: box-shadow 0.3s ease;
       cursor: pointer;
     }
+    
     #accomplishments details:hover {
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
+    
     #accomplishments summary {
       font-size: 1.2rem;
       font-weight: 600;
       list-style: none;
       cursor: pointer;
+      position: relative;
+      padding-left: 25px;
     }
+    
+    #accomplishments summary::-webkit-details-marker {
+      display: none;
+    }
+    
+    #accomplishments summary:after {
+      content: '▼';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1em;
+      color: #333;
+      transition: transform 0.3s ease;
+    }
+    
+    #accomplishments details[open] summary:after {
+      transform: translateY(-50%) rotate(180deg);
+    }
+    
     #accomplishments p {
       margin-top: 12px;
       font-size: 1rem;
@@ -359,6 +489,80 @@
       50% { background-color: #e0e0e0; }
       100% { background-color: #f0f0f0; }
     }
+    
+    /* Update Instagram preview styles */
+    .project-image-container img {
+      width: 280px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    
+    @media (max-width: 768px) {
+      .project-image-container img {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+      }
+    }
+    
+    /* References Section Mobile Styles */
+    @media (max-width: 768px) {
+      .reference {
+        background: #fff;
+        border-radius: 16px;
+        overflow: hidden;
+        margin-bottom: 30px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        padding: 15px;
+      }
+
+      .reference .slider {
+        width: 100%;
+        max-width: 350px;
+        height: 250px;
+        margin: 0 auto;
+      }
+
+      .reference .slider img.slider-image {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        background: #f5f5f5;
+        padding: 10px;
+      }
+
+      .reference .reference-info {
+        border-top: 1px solid #eee;
+        margin-top: 0;
+        padding: 0;
+        text-align: center;
+      }
+
+      .reference .reference-info h3 {
+        font-size: 1.2rem;
+        margin: 4px 0 8px 0;
+      }
+
+      .reference .reference-info p {
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        font-size: 0.9rem;
+        color: #666;
+      }
+
+      .reference .slider-nav {
+        position: absolute;
+        bottom: 10px;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 10px;
+        z-index: 2;
+      }
+    }
   </style>
   
   <!-- Preconnect to external domains -->
@@ -376,7 +580,7 @@
       width="150" 
       height="150"
     />
-    <h1>Ulugbek Pulatov, 24 y.o., marketer</h1>
+    <h1>Ulugbek Pulatov, 24 y.o.</h1>
     <div class="social-icons">
       <a href="https://www.linkedin.com/in/ulugbekpulatov" target="_blank" rel="noopener" aria-label="LinkedIn">
         <img 
@@ -423,51 +627,68 @@
     
     <!-- Project 1 -->
     <div class="project">
-      <picture>
-        <source srcset="pulatovschool.webp" type="image/webp">
-        <img 
-          src="pulatovschool.jpg" 
-          alt="Pulatov School" 
-          class="lazy-image" 
-          loading="lazy" 
-          width="280" 
-          height="180"
-        />
-      </picture>
-      <div class="project-info">
-        <h3>Founder and CEO of online academy</h3>
-        <p>11,000 clients and a turnover of $3 million</p>
-        <p><a href="https://pulatovschool.uz" target="_blank">https://pulatovschool.uz</a></p>
+      <div class="project-content">
+        <div class="project-image-container">
+          <picture>
+            <source srcset="pulatovschool.webp" type="image/webp">
+            <img 
+              src="pulatovschool.jpg" 
+              alt="Pulatov School" 
+              class="lazy-image" 
+              loading="lazy" 
+              width="280" 
+              height="180"
+            />
+          </picture>
+          <div class="image-caption">photo with a team</div>
+        </div>
+        <div class="project-info">
+          <h3>Founder and CEO of online academy</h3>
+          <p>11,000 clients and a turnover of $3 million</p>
+          <p><a href="https://pulatovschool.uz" target="_blank">https://pulatovschool.uz</a></p>
+        </div>
       </div>
     </div>
     
     <!-- Project 2 -->
     <div class="project">
-      <picture>
-        <source srcset="forte.webp" type="image/webp">
-        <img src="forte.png" alt="Forte Agency" class="lazy-image" loading="lazy" width="280" height="180" />
-      </picture>
-      <div class="project-info">
-        <h3>Founder and CEO of influencer marketing agency</h3>
-        <p>Generated $2 million in earnings for influencers</p>
-        <p><a href="https://forteagency.io" target="_blank">https://forteagency.io</a></p>
+      <div class="project-content">
+        <div class="project-image-container">
+          <picture>
+            <source srcset="forte.webp" type="image/webp">
+            <img src="forte.png" alt="Forte Agency" class="lazy-image" loading="lazy" width="280" height="180" />
+          </picture>
+          <div class="image-caption">photo with influencers</div>
+        </div>
+        <div class="project-info">
+          <h3>Founder and CEO of influencer marketing agency</h3>
+          <p>Generated $2 million in earnings for influencers</p>
+          <p><a href="https://forteagency.io" target="_blank">https://forteagency.io</a></p>
+        </div>
       </div>
     </div>
     
     <!-- Project 3: Former Influencer with Instagram Video Preview -->
     <div class="project">
-      <div class="instagram-embed-container">
-        <picture>
-          <source srcset="influencer.webp" type="image/webp">
-          <img src="influencer.png" alt="Instagram Video Preview" class="lazy-image" loading="lazy" width="300" height="300">
-        </picture>
-        <div class="play-button">
-          <i class="fas fa-play-circle"></i>
+      <div class="project-content">
+        <div class="project-image-container">
+          <picture>
+            <source srcset="influencer.webp" type="image/webp">
+            <img 
+              src="influencer.png" 
+              alt="Instagram Video Preview" 
+              class="lazy-image" 
+              loading="lazy" 
+              width="280" 
+              height="180"
+            >
+          </picture>
+          <div class="image-caption">selfie with followers</div>
         </div>
-      </div>
-      <div class="project-info">
-        <h3>Former Influencer</h3>
-        <p>Built a following of 250k on Instagram</p>
+        <div class="project-info">
+          <h3>Former influencer</h3>
+          <p>Built a following of 250k on Instagram</p>
+        </div>
       </div>
     </div>
   </section>
@@ -476,7 +697,7 @@
   <section id="now">
     <h2>Now</h2>
     <p>
-      Six months ago, I decided to shift my focus towards mobile application development using large language models, and in that time I managed to accomplish the following:
+      Six months ago, I decided to shift my focus towards mobile application development using LLMs, and in that time I managed to accomplish the following:
     </p>
     <ul class="now-list">
       <li>
@@ -496,7 +717,7 @@
         I am looking for a technical co-founder with extensive experience in developing web and mobile applications—someone who is up-to-date with the latest advancements in AI and proficient in working with LLMs. I will focus on marketing, while the co-founder handles all technical aspects.
       </p>
       <p>
-        <strong>Goal:</strong> To collaboratively create applications in the USA at the intersection of B2C, mobile apps, and psychology.
+        <strong>Goal:</strong> To collaboratively create applications in the USA at the intersection of B2C, mobile apps, and psychology, but open to other opportunities as well.
       </p>
     </div>
   </section>
@@ -539,7 +760,7 @@
       </div>
       <!-- Reference text (vertically centered) -->
       <div class="reference-info">
-        <h3>Anastasia</h3>
+        <h3>Anastasia, producer of "Forte Agency"</h3>
         <p>She worked as a producer on my projects, bringing creativity and organization to our work.</p>
       </div>
     </div>
@@ -547,7 +768,7 @@
   
   <!-- Additional Accomplishments (Q&A) Section -->
   <section id="accomplishments">
-    <h2>Additional Accomplishments</h2>
+    <h2>Additional accomplishments</h2>
     <!-- Q&A Item 1 -->
     <div class="qa-item">
       <details>
@@ -573,7 +794,7 @@
     <!-- Q&A Item 2 -->
     <div class="qa-item">
       <details>
-        <summary>Another Impressive Thing</summary>
+        <summary>Another impressive thing</summary>
         <p>
           During quarantine, I helped my friend promote his product with more than 100 popular celebrities in Uzbekistan in exchange for his goods (cost $30). The entire country believed my friend's company was government-backed because people assumed that a huge amount of money was being spent on advertising. No commercial project had ever done anything like this before, but in reality, I simply took advantage of the unique market conditions.
         </p>
@@ -583,7 +804,7 @@
   
   <!-- My Contacts Section -->
   <section id="contacts">
-    <h2>My Contacts</h2>
+    <h2>My contacts</h2>
     <p>Email: <a href="mailto:ulugbek.pulatov.00@gmail.com">ulugbek.pulatov.00@gmail.com</a></p>
     <p>Telegram: <a href="https://t.me/ulugbekpulatovv" target="_blank">t.me/ulugbekpulatovv</a></p>
     <p>WhatsApp: <a href="https://wa.me/998946119797" target="_blank">+998946119797</a></p>

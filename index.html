@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Your Name - Personal Website</title>
+  <title>Personal Website</title>
   
   <!-- Preload critical images -->
   <link rel="preload" as="image" href="my-photo.jpg">
@@ -208,40 +208,39 @@
       gap: 20px;
     }
     .reference .slider {
-      /* Set slider width same as project images (280px)
-         and height increased by 40% over 180px → 180px * 1.4 = 252px */
       width: 280px;
       height: 252px;
       position: relative;
       overflow: hidden;
+      flex-shrink: 0;
+      background: #f5f5f5;
+      border-radius: 8px;
     }
     .reference .slider img.slider-image {
-      width: 280px;
-      height: 252px;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       border-radius: 8px;
-      position: absolute;
-      top: 0;
-      left: 0;
+      display: none;
+      position: static;
     }
-    .reference .slider .slider-nav {
-      position: absolute;
-      width: 100%;
-      bottom: 5px;
-      display: flex;
-      justify-content: space-between;
-      padding: 0 10px;
-      box-sizing: border-box;
+    .reference .slider img.slider-image.active {
+      display: block;
     }
     .reference .slider button {
-      background: rgba(0,0,0,0.5);
+      background: rgba(0,0,0,0.6);
       border: none;
       color: #fff;
       font-size: 1rem;
       cursor: pointer;
-      padding: 5px 10px;
+      padding: 8px 12px;
       border-radius: 4px;
+      transition: background-color 0.3s ease;
     }
+    .reference .slider button:hover {
+      background: rgba(0,0,0,0.8);
+    }
+    
     /* Center the reference text vertically */
     .reference .reference-info {
       flex: 1;
@@ -309,6 +308,19 @@
       .reference .slider {
         width: 100%;
         height: auto;
+      }
+      .reference {
+        flex-direction: column;
+        text-align: center;
+      }
+      .reference .slider {
+        width: 100%;
+        max-width: 400px;
+        height: 300px;
+        margin: 0 auto;
+      }
+      .reference .slider img.slider-image {
+        position: static;
       }
     }
     
@@ -572,24 +584,63 @@
   
   <!-- JavaScript: Simple Slider for References -->
   <script>
-    document.querySelectorAll('.slider').forEach(function(slider) {
-      var images = slider.querySelectorAll('img.slider-image');
-      var currentIndex = 0;
-      var nextBtn = slider.querySelector('.slider-next');
-      var prevBtn = slider.querySelector('.slider-prev');
-      
-      nextBtn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        images[currentIndex].style.display = 'none';
-        currentIndex = (currentIndex + 1) % images.length;
-        images[currentIndex].style.display = 'block';
-      });
-      
-      prevBtn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        images[currentIndex].style.display = 'none';
-        currentIndex = (currentIndex - 1 + images.length) % images.length;
-        images[currentIndex].style.display = 'block';
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.slider').forEach(function(slider) {
+        var images = slider.querySelectorAll('img.slider-image');
+        var currentIndex = 0;
+        var nextBtn = slider.querySelector('.slider-next');
+        var prevBtn = slider.querySelector('.slider-prev');
+        
+        // Show first image initially
+        images[0].classList.add('active');
+        
+        function showImage(index) {
+          images[currentIndex].classList.remove('active');
+          currentIndex = index;
+          images[currentIndex].classList.add('active');
+        }
+        
+        nextBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          var nextIndex = (currentIndex + 1) % images.length;
+          showImage(nextIndex);
+        });
+        
+        prevBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          var prevIndex = (currentIndex - 1 + images.length) % images.length;
+          showImage(prevIndex);
+        });
+        
+        // Add touch swipe support for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        slider.addEventListener('touchstart', function(e) {
+          touchStartX = e.changedTouches[0].screenX;
+        }, false);
+        
+        slider.addEventListener('touchend', function(e) {
+          touchEndX = e.changedTouches[0].screenX;
+          handleSwipe();
+        }, false);
+        
+        function handleSwipe() {
+          const swipeThreshold = 50; // minimum distance for swipe
+          const difference = touchStartX - touchEndX;
+          
+          if (Math.abs(difference) > swipeThreshold) {
+            if (difference > 0) {
+              // Swipe left - show next
+              var nextIndex = (currentIndex + 1) % images.length;
+              showImage(nextIndex);
+            } else {
+              // Swipe right - show previous
+              var prevIndex = (currentIndex - 1 + images.length) % images.length;
+              showImage(prevIndex);
+            }
+          }
+        }
       });
     });
   </script>

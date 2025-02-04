@@ -5,28 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Your Name - Personal Website</title>
   
-  <!-- Font Awesome is still loaded in case you want to use it elsewhere.
-       For the social media buttons below, you can replace the <i> elements with <img> tags.
-       To do so, download the official logos (preferably in SVG format) from:
-         • LinkedIn: https://brand.linkedin.com/downloads
-         • Twitter (X): https://about.twitter.com/en/who-we-are/brand-toolkit
-         • Instagram: https://www.instagram.com/about/us/brand/
-         • Telegram: https://telegram.org/brand
-       Then update the <a> elements in the header accordingly. -->
+  <!-- Preload critical images -->
+  <link rel="preload" as="image" href="my-photo.jpg">
+  <link rel="preload" as="image" href="linkedin-logo.png">
+  <link rel="preload" as="image" href="x-logo.png">
+  <link rel="preload" as="image" href="Instagram-logo.png">
+  <link rel="preload" as="image" href="telegram-logo.png">
+  
+  <!-- Defer non-critical CSS -->
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    integrity="sha512-papNG6C+U+E3I+a4vSk1d6u68M+8i7O1z/9sQvlfllYU+9+6aOz2jU0NE6kqYvsyY/k5IYJeEGx3hIoXgqY3Qw=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
+    media="print" onload="this.media='all'"
   />
   
   <style>
-    /* Basic Reset */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    /* Critical CSS here */
+    /* Add font-display swap for better font loading */
+    @font-face {
+      font-family: -apple-system;
+      font-display: swap;
+    }
+    
+    /* Move non-critical styles to a separate stylesheet */
+    @media print {
+      /* existing styles... */
+    }
+    
+    /* Image optimization styles */
+    img {
+      max-width: 100%;
+      height: auto;
     }
     
     /* Global Styles */
@@ -330,23 +339,33 @@
       100% { background-color: #f0f0f0; }
     }
   </style>
+  
+  <!-- Preconnect to external domains -->
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
 </head>
 <body>
   <header>
-    <!-- Replace with your actual profile picture -->
-    <img src="my-photo.jpg" alt="Your Picture" class="profile-pic lazy-image" loading="lazy" />
+    <!-- Add width and height attributes to all images -->
+    <img 
+      src="my-photo.jpg" 
+      alt="Your Picture" 
+      class="profile-pic lazy-image" 
+      loading="lazy" 
+      width="150" 
+      height="150"
+    />
     <h1>Ulugbek Pulatov, 24 y.o., marketer</h1>
     <div class="social-icons">
-      <!-- Social media buttons: You can choose between Font Awesome icons or image logos.
-           To use image logos, replace the <i> elements below with <img> tags.
-           
-           Example with images:
-           <a href="https://www.linkedin.com/in/yourprofile" target="_blank" aria-label="LinkedIn">
-             <img src="linkedin-logo.svg" alt="LinkedIn Logo" class="social-logo">
-           </a>
-      -->
-      <a href="https://www.linkedin.com/in/ulugbekpulatov" target="_blank" aria-label="LinkedIn">
-        <img src="linkedin-logo.png" alt="LinkedIn" style="width: 65px; height:65px;" class="lazy-image" loading="lazy">
+      <a href="https://www.linkedin.com/in/ulugbekpulatov" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <img 
+          src="linkedin-logo.png" 
+          alt="LinkedIn" 
+          width="65" 
+          height="65" 
+          class="lazy-image" 
+          loading="lazy"
+        >
       </a>
       <a href="https://twitter.com/bekpulatov1" target="_blank" aria-label="X">
         <img src="x-logo.png" alt="X" style="width: 32px; height: 32px;" class="lazy-image" loading="lazy">
@@ -366,8 +385,16 @@
     
     <!-- Project 1 -->
     <div class="project">
-      <!-- Replace with the image for pulatovschool.uz -->
-      <img src="pulatovschool.jpg" alt="Pulatov School" class="lazy-image" loading="lazy" />
+      <!-- Add srcset for responsive images -->
+      <img 
+        src="pulatovschool.jpg" 
+        srcset="pulatovschool.jpg 1x, pulatovschool@2x.jpg 2x"
+        alt="Pulatov School" 
+        class="lazy-image" 
+        loading="lazy" 
+        width="280" 
+        height="180"
+      />
       <div class="project-info">
         <h3>Founder and CEO of online academy</h3>
         <p>11,000 clients and a turnover of $3 million</p>
@@ -377,8 +404,10 @@
     
     <!-- Project 2 -->
     <div class="project">
-      <!-- Replace with the image for forteagency.io -->
-      <img src="forte.png" alt="Forte Agency" class="lazy-image" loading="lazy" />
+      <picture>
+        <source srcset="forte.webp" type="image/webp">
+        <img src="forte.png" alt="Forte Agency" class="lazy-image" loading="lazy" width="280" height="180" />
+      </picture>
       <div class="project-info">
         <h3>Founder and CEO of influencer marketing agency</h3>
         <p>Generated $2 million in earnings for influencers</p>
@@ -388,15 +417,15 @@
     
     <!-- Project 3: Former Influencer with Instagram Video Preview -->
     <div class="project">
-      <!-- Instagram video preview container on the left -->
       <div class="instagram-embed-container">
-        <!-- Replace "instagram-preview.jpg" with your preview image -->
-        <img src="influencer.png" alt="Instagram Video Preview" class="lazy-image" loading="lazy">
+        <picture>
+          <source srcset="influencer.webp" type="image/webp">
+          <img src="influencer.png" alt="Instagram Video Preview" class="lazy-image" loading="lazy" width="300" height="300">
+        </picture>
         <div class="play-button">
           <i class="fas fa-play-circle"></i>
         </div>
       </div>
-      <!-- Text on the right -->
       <div class="project-info">
         <h3>Former Influencer</h3>
         <p>Built a following of 250k on Instagram</p>

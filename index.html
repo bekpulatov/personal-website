@@ -308,12 +308,33 @@
       height: 20px;
       object-fit: contain;
     }
+    
+    /* Add loading placeholder styles */
+    .lazy-image {
+      opacity: 0;
+      transition: opacity 0.3s ease-in;
+    }
+    .lazy-image.loaded {
+      opacity: 1;
+    }
+    
+    /* Loading placeholder animation */
+    .image-placeholder {
+      background: #f0f0f0;
+      animation: pulse 1.5s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { background-color: #f0f0f0; }
+      50% { background-color: #e0e0e0; }
+      100% { background-color: #f0f0f0; }
+    }
   </style>
 </head>
 <body>
   <header>
     <!-- Replace with your actual profile picture -->
-    <img src="my-photo.jpg" alt="Your Picture" class="profile-pic" />
+    <img src="my-photo.jpg" alt="Your Picture" class="profile-pic lazy-image" loading="lazy" />
     <h1>Ulugbek Pulatov, 24 y.o., marketer</h1>
     <div class="social-icons">
       <!-- Social media buttons: You can choose between Font Awesome icons or image logos.
@@ -325,16 +346,16 @@
            </a>
       -->
       <a href="https://www.linkedin.com/in/ulugbekpulatov" target="_blank" aria-label="LinkedIn">
-        <img src="linkedin-logo.png" alt="LinkedIn" style="width: 65px; height:65px;">
+        <img src="linkedin-logo.png" alt="LinkedIn" style="width: 65px; height:65px;" class="lazy-image" loading="lazy">
       </a>
       <a href="https://twitter.com/bekpulatov1" target="_blank" aria-label="X">
-        <img src="x-logo.png" alt="X" style="width: 32px; height: 32px;">
+        <img src="x-logo.png" alt="X" style="width: 32px; height: 32px;" class="lazy-image" loading="lazy">
       </a>
       <a href="https://www.instagram.com/bek_pulatoff" target="_blank" aria-label="Instagram">
-        <img src="Instagram-logo.png" alt="Instagram" style="width: 40px; height: 40px;">
+        <img src="Instagram-logo.png" alt="Instagram" style="width: 40px; height: 40px;" class="lazy-image" loading="lazy">
       </a>
       <a href="https://t.me/pulatov_channel" target="_blank" aria-label="Telegram">
-        <img src="telegram-logo.png" alt="Telegram" style="width: 40px; height: 40px;">
+        <img src="telegram-logo.png" alt="Telegram" style="width: 40px; height: 40px;" class="lazy-image" loading="lazy">
       </a>
     </div>
   </header>
@@ -346,7 +367,7 @@
     <!-- Project 1 -->
     <div class="project">
       <!-- Replace with the image for pulatovschool.uz -->
-      <img src="pulatovschool.jpg" alt="Pulatov School" />
+      <img src="pulatovschool.jpg" alt="Pulatov School" class="lazy-image" loading="lazy" />
       <div class="project-info">
         <h3>Founder and CEO of online academy</h3>
         <p>11,000 clients and a turnover of $3 million</p>
@@ -357,7 +378,7 @@
     <!-- Project 2 -->
     <div class="project">
       <!-- Replace with the image for forteagency.io -->
-      <img src="forte.png" alt="Forte Agency" />
+      <img src="forte.png" alt="Forte Agency" class="lazy-image" loading="lazy" />
       <div class="project-info">
         <h3>Founder and CEO of influencer marketing agency</h3>
         <p>Generated $2 million in earnings for influencers</p>
@@ -370,7 +391,7 @@
       <!-- Instagram video preview container on the left -->
       <div class="instagram-embed-container">
         <!-- Replace "instagram-preview.jpg" with your preview image -->
-        <img src="influencer.png" alt="Instagram Video Preview">
+        <img src="influencer.png" alt="Instagram Video Preview" class="lazy-image" loading="lazy">
         <div class="play-button">
           <i class="fas fa-play-circle"></i>
         </div>
@@ -422,8 +443,8 @@
       <!-- Slider container with two images -->
       <div class="slider">
         <!-- Replace with your images for Mikhail -->
-        <img src="mikhail1.jpg" alt="Mikhail Reference 1" class="slider-image">
-        <img src="mikhail2.jpg" alt="Mikhail Reference 2" class="slider-image" style="display: none;">
+        <img src="mikhail1.jpg" alt="Mikhail Reference 1" class="slider-image lazy-image" loading="lazy">
+        <img src="mikhail2.jpg" alt="Mikhail Reference 2" class="slider-image lazy-image" loading="lazy" style="display: none;">
         <div class="slider-nav">
           <button class="slider-prev">&#10094;</button>
           <button class="slider-next">&#10095;</button>
@@ -441,8 +462,8 @@
       <!-- Slider container with two images -->
       <div class="slider">
         <!-- Replace with your images for Anastasia -->
-        <img src="anastasia1.jpg" alt="Anastasia Reference 1" class="slider-image">
-        <img src="anastasia2.jpg" alt="Anastasia Reference 2" class="slider-image" style="display: none;">
+        <img src="anastasia1.jpg" alt="Anastasia Reference 1" class="slider-image lazy-image" loading="lazy">
+        <img src="anastasia2.jpg" alt="Anastasia Reference 2" class="slider-image lazy-image" loading="lazy" style="display: none;">
         <div class="slider-nav">
           <button class="slider-prev">&#10094;</button>
           <button class="slider-next">&#10095;</button>
@@ -540,6 +561,28 @@
         images[currentIndex].style.display = 'none';
         currentIndex = (currentIndex - 1 + images.length) % images.length;
         images[currentIndex].style.display = 'block';
+      });
+    });
+  </script>
+  
+  <!-- Add this before your existing scripts -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Handle lazy loading images
+      const lazyImages = document.querySelectorAll('.lazy-image');
+      
+      const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            img.classList.add('loaded');
+            observer.unobserve(img);
+          }
+        });
+      });
+      
+      lazyImages.forEach(img => {
+        imageObserver.observe(img);
       });
     });
   </script>

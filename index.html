@@ -299,14 +299,22 @@
       gap: 20px;
     }
     .reference .slider {
-      width: 280px;
-      height: 252px;
       position: relative;
-      overflow: hidden;
-      flex-shrink: 0;
-      background: #f5f5f5;
-      border-radius: 8px;
-      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .reference .slider .image-caption {
+      font-size: 0.85rem;
+      color: #666;
+      font-style: italic;
+      text-align: center;
+      padding: 4px 8px;
+      background: #f8f9fa;
+      border-radius: 4px;
+      margin-top: 8px;
+      position: static;
+      transform: none;
     }
     .reference .slider img.slider-image {
       width: 100%;
@@ -314,8 +322,6 @@
       object-fit: contain;
       border-radius: 8px;
       display: none;
-      position: static;
-      background: #f5f5f5;
     }
     .reference .slider img.slider-image.active {
       display: block;
@@ -518,50 +524,167 @@
       }
 
       .reference .slider {
-        width: 100%;
-        max-width: 350px;
-        height: 250px;
+        width: 280px;
+        height: 180px;
         margin: 0 auto;
       }
 
       .reference .slider img.slider-image {
-        width: 100%;
-        height: 100%;
+        width: 280px;
+        height: 180px;
         object-fit: contain;
         background: #f5f5f5;
         padding: 10px;
       }
+    }
+    
+    /* Desktop styles for references */
+    .reference .slider {
+      width: 280px;
+      height: 180px;
+    }
 
-      .reference .reference-info {
-        border-top: 1px solid #eee;
-        margin-top: 0;
-        padding: 0;
-        text-align: center;
+    .reference .slider img.slider-image {
+      width: 280px;
+      height: 180px;
+      object-fit: contain;
+      background: #f5f5f5;
+      padding: 10px;
+    }
+
+    .slider-container {
+      position: relative;
+      width: 280px;
+      height: 180px;
+      background: #f5f5f5;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .slider-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      padding: 10px;
+      display: none;
+    }
+
+    .slider-image.active {
+      opacity: 1;
+      display: block;
+    }
+
+    .slider-nav {
+      position: absolute;
+      bottom: 10px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 10px;
+      z-index: 2;
+    }
+
+    .slider button {
+      background: rgba(0,0,0,0.6);
+      border: none;
+      color: #fff;
+      font-size: 1rem;
+      cursor: pointer;
+      padding: 8px 12px;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+      z-index: 3;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      padding: 20px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: rgba(0,0,0,0.9);
+      cursor: zoom-out;
+    }
+
+    .modal-content {
+      margin: auto;
+      display: block;
+      max-width: 90%;
+      max-height: 90vh;
+      object-fit: contain;
+    }
+
+    .modal-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.1);
+      border: none;
+      color: white;
+      font-size: 24px;
+      padding: 16px;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+    }
+
+    .modal-nav:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    .modal-prev {
+      left: 20px;
+    }
+
+    .modal-next {
+      right: 20px;
+    }
+
+    .modal-close {
+      position: absolute;
+      right: 35px;
+      top: 15px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 1001;
+    }
+
+    @media (max-width: 768px) {
+      .modal-nav {
+        padding: 12px;
+        font-size: 20px;
       }
 
-      .reference .reference-info h3 {
-        font-size: 1.2rem;
-        margin: 4px 0 8px 0;
+      .modal-prev {
+        left: 10px;
       }
 
-      .reference .reference-info p {
-        margin: 0;
-        padding: 0;
-        text-align: center;
-        font-size: 0.9rem;
-        color: #666;
+      .modal-next {
+        right: 10px;
       }
+    }
 
-      .reference .slider-nav {
-        position: absolute;
-        bottom: 10px;
-        left: 0;
-        right: 0;
-        display: flex;
-        justify-content: space-between;
-        padding: 0 10px;
-        z-index: 2;
-      }
+    /* Make reference images clickable */
+    .slider-image {
+      cursor: zoom-in;
     }
   </style>
   
@@ -727,41 +850,41 @@
     <h2>References</h2>
     <p>People who have worked with me</p>
     
-    <!-- Reference 1 -->
-    <div class="reference">
-      <!-- Slider container with two images -->
+    <!-- Reference 1: Anastasia -->
+    <div class="reference" id="anastasia-reference">
       <div class="slider">
-        <!-- Replace with your images for Mikhail -->
-        <img src="mikhail1.jpg" alt="Mikhail Reference 1" class="slider-image lazy-image" loading="lazy">
-        <img src="mikhail2.jpg" alt="Mikhail Reference 2" class="slider-image lazy-image" loading="lazy" style="display: none;">
-        <div class="slider-nav">
-          <button class="slider-prev">&#10094;</button>
-          <button class="slider-next">&#10095;</button>
+        <div class="slider-container" id="anastasia-slider">
+          <img src="anastasia1.jpg" alt="Anastasia Reference 1" class="slider-image lazy-image active" loading="lazy">
+          <img src="anastasia5.jpg" alt="Anastasia Reference 2" class="slider-image lazy-image" loading="lazy">
         </div>
-      </div>
-      <!-- Reference text (vertically centered) -->
-      <div class="reference-info">
-        <h3>Mikhail, COO of Online Academy "Pulatov School"</h3>
-        <p>A seasoned professional from Ukraine.</p>
-      </div>
-    </div>
-    
-    <!-- Reference 2 -->
-    <div class="reference">
-      <!-- Slider container with two images -->
-      <div class="slider">
-        <!-- Replace with your images for Anastasia -->
-        <img src="anastasia1.jpg" alt="Anastasia Reference 1" class="slider-image lazy-image" loading="lazy">
-        <img src="anastasia2.jpg" alt="Anastasia Reference 2" class="slider-image lazy-image" loading="lazy" style="display: none;">
         <div class="slider-nav">
-          <button class="slider-prev">&#10094;</button>
-          <button class="slider-next">&#10095;</button>
+          <button class="slider-prev" onclick="prevSlide('anastasia-slider')">&#10094;</button>
+          <button class="slider-next" onclick="nextSlide('anastasia-slider')">&#10095;</button>
         </div>
+        <div class="image-caption">Swipe right to see the translation in Eng</div>
       </div>
-      <!-- Reference text (vertically centered) -->
       <div class="reference-info">
         <h3>Anastasia, producer at "Forte Agency"</h3>
         <p>She worked as a producer on my projects, bringing creativity and organization to our work.</p>
+      </div>
+    </div>
+    
+    <!-- Reference 2: Mikhail -->
+    <div class="reference" id="mikhail-reference">
+      <div class="slider">
+        <div class="slider-container" id="mikhail-slider">
+          <img src="mikhail1.jpg" alt="Mikhail Reference 1" class="slider-image lazy-image active" loading="lazy">
+          <img src="mikhail5.jpg" alt="Mikhail Reference 2" class="slider-image lazy-image" loading="lazy">
+        </div>
+        <div class="slider-nav">
+          <button class="slider-prev" onclick="prevSlide('mikhail-slider')">&#10094;</button>
+          <button class="slider-next" onclick="nextSlide('mikhail-slider')">&#10095;</button>
+        </div>
+        <div class="image-caption">Swipe right to see the translation in Eng</div>
+      </div>
+      <div class="reference-info">
+        <h3>Mikhail, COO of Online Academy "Pulatov School"</h3>
+        <p>A seasoned professional from Ukraine.</p>
       </div>
     </div>
   </section>
@@ -832,63 +955,65 @@
   
   <!-- JavaScript: Simple Slider for References -->
   <script>
+    function prevSlide(sliderId) {
+      const container = document.getElementById(sliderId);
+      const images = Array.from(container.getElementsByClassName('slider-image'));
+      const activeImage = container.querySelector('.slider-image.active');
+      const currentIndex = images.indexOf(activeImage);
+      const prevIndex = (currentIndex - 1 + images.length) % images.length;
+      
+      activeImage.classList.remove('active');
+      images[prevIndex].classList.add('active');
+    }
+
+    function nextSlide(sliderId) {
+      const container = document.getElementById(sliderId);
+      const images = Array.from(container.getElementsByClassName('slider-image'));
+      const activeImage = container.querySelector('.slider-image.active');
+      const currentIndex = images.indexOf(activeImage);
+      const nextIndex = (currentIndex + 1) % images.length;
+      
+      activeImage.classList.remove('active');
+      images[nextIndex].classList.add('active');
+    }
+
+    // Initialize sliders
     document.addEventListener('DOMContentLoaded', function() {
-      document.querySelectorAll('.slider').forEach(function(slider) {
-        var images = slider.querySelectorAll('img.slider-image');
-        var currentIndex = 0;
-        var nextBtn = slider.querySelector('.slider-next');
-        var prevBtn = slider.querySelector('.slider-prev');
+      const sliders = ['anastasia-slider', 'mikhail-slider'];
+      
+      sliders.forEach(sliderId => {
+        const container = document.getElementById(sliderId);
+        const images = container.getElementsByClassName('slider-image');
         
-        // Show first image initially
-        images[0].classList.add('active');
-        
-        function showImage(index) {
-          images[currentIndex].classList.remove('active');
-          currentIndex = index;
-          images[currentIndex].classList.add('active');
-        }
-        
-        nextBtn.addEventListener('click', function(e) {
-          e.stopPropagation();
-          var nextIndex = (currentIndex + 1) % images.length;
-          showImage(nextIndex);
+        // Make sure only first image is active
+        Array.from(images).forEach((img, index) => {
+          if (index === 0) {
+            img.classList.add('active');
+          } else {
+            img.classList.remove('active');
+          }
         });
         
-        prevBtn.addEventListener('click', function(e) {
-          e.stopPropagation();
-          var prevIndex = (currentIndex - 1 + images.length) % images.length;
-          showImage(prevIndex);
-        });
-        
-        // Add touch swipe support for mobile
+        // Touch swipe support
         let touchStartX = 0;
-        let touchEndX = 0;
         
-        slider.addEventListener('touchstart', function(e) {
+        container.addEventListener('touchstart', function(e) {
           touchStartX = e.changedTouches[0].screenX;
-        }, false);
+        });
         
-        slider.addEventListener('touchend', function(e) {
-          touchEndX = e.changedTouches[0].screenX;
-          handleSwipe();
-        }, false);
-        
-        function handleSwipe() {
-          const swipeThreshold = 50; // minimum distance for swipe
+        container.addEventListener('touchend', function(e) {
+          const touchEndX = e.changedTouches[0].screenX;
           const difference = touchStartX - touchEndX;
+          const swipeThreshold = 50;
           
           if (Math.abs(difference) > swipeThreshold) {
             if (difference > 0) {
-              // Swipe left - show next
-              var nextIndex = (currentIndex + 1) % images.length;
-              showImage(nextIndex);
+              nextSlide(sliderId);
             } else {
-              // Swipe right - show previous
-              var prevIndex = (currentIndex - 1 + images.length) % images.length;
-              showImage(prevIndex);
+              prevSlide(sliderId);
             }
           }
-        }
+        });
       });
     });
   </script>
@@ -911,6 +1036,113 @@
       
       lazyImages.forEach(img => {
         imageObserver.observe(img);
+      });
+    });
+  </script>
+
+  <!-- Update modal HTML -->
+  <div id="imageModal" class="modal">
+    <span class="modal-close">&times;</span>
+    <button class="modal-nav modal-prev">&#10094;</button>
+    <img class="modal-content" id="modalImage">
+    <button class="modal-nav modal-next">&#10095;</button>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const modal = document.getElementById('imageModal');
+      const modalImg = document.getElementById('modalImage');
+      const closeBtn = document.getElementsByClassName('modal-close')[0];
+      const prevBtn = modal.querySelector('.modal-prev');
+      const nextBtn = modal.querySelector('.modal-next');
+      
+      let currentSlider = null;
+      let currentImageIndex = 0;
+
+      // Function to show image in modal
+      function showModalImage(slider, index) {
+        const images = Array.from(slider.getElementsByClassName('slider-image'));
+        modalImg.src = images[index].src;
+        currentImageIndex = index;
+      }
+
+      // Add click event to all slider images
+      document.querySelectorAll('.slider-image').forEach(img => {
+        img.addEventListener('click', function() {
+          const slider = this.closest('.slider-container');
+          const images = Array.from(slider.getElementsByClassName('slider-image'));
+          currentSlider = slider;
+          currentImageIndex = images.indexOf(this);
+          
+          modal.style.display = 'block';
+          showModalImage(slider, currentImageIndex);
+        });
+      });
+
+      // Navigation functions
+      function showNextImage() {
+        if (!currentSlider) return;
+        const images = Array.from(currentSlider.getElementsByClassName('slider-image'));
+        currentImageIndex = (currentImageIndex + 1) % images.length;
+        showModalImage(currentSlider, currentImageIndex);
+      }
+
+      function showPrevImage() {
+        if (!currentSlider) return;
+        const images = Array.from(currentSlider.getElementsByClassName('slider-image'));
+        currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+        showModalImage(currentSlider, currentImageIndex);
+      }
+
+      // Navigation button clicks
+      nextBtn.addEventListener('click', showNextImage);
+      prevBtn.addEventListener('click', showPrevImage);
+
+      // Close modal
+      function closeModal() {
+        modal.style.display = 'none';
+        currentSlider = null;
+      }
+
+      closeBtn.addEventListener('click', closeModal);
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          closeModal();
+        }
+      });
+
+      // Keyboard navigation
+      document.addEventListener('keydown', function(e) {
+        if (modal.style.display === 'block') {
+          if (e.key === 'ArrowLeft') {
+            showPrevImage();
+          } else if (e.key === 'ArrowRight') {
+            showNextImage();
+          } else if (e.key === 'Escape') {
+            closeModal();
+          }
+        }
+      });
+
+      // Touch swipe support for modal
+      let touchStartX = 0;
+      
+      modal.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+      });
+      
+      modal.addEventListener('touchend', function(e) {
+        const touchEndX = e.changedTouches[0].screenX;
+        const difference = touchStartX - touchEndX;
+        const swipeThreshold = 50;
+        
+        if (Math.abs(difference) > swipeThreshold) {
+          if (difference > 0) {
+            showNextImage();
+          } else {
+            showPrevImage();
+          }
+        }
       });
     });
   </script>
